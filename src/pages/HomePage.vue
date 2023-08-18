@@ -6,11 +6,14 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import KeysPanel from "../components/KeysPanel.vue";
 import keyMap from "../assets/keycode";
 import { useConfig } from "../stores/config";
 
 const code = ref<string[]>([]);
+const i18n = useI18n();
+
 const { sync } = useConfig();
 
 function getKeyName(keyCode: string): string {
@@ -18,8 +21,11 @@ function getKeyName(keyCode: string): string {
   return map[keyCode] || "";
 }
 
+// 1. HomePage and SettingPage are not in the same config-store, so the 'sync' function needs to be invoked.
+// 2. if user chage language, need change i18n's locale.
 window.EApi.onSyncConfig(() => {
-  sync();
+  const data = sync();
+  i18n.locale.value = data.language;
 });
 
 window.EApi.onKeydown((keyCode: string) => {

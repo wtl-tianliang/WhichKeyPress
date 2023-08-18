@@ -19,6 +19,11 @@ function resolvePath(_path: string): string {
   return path.join(process.env.DIST, _path);
 }
 
+function loadLanguage(name: string) {
+  return import(`../locales/${name}.json`).catch(() => {
+    return import("../locales/en_US.json");
+  });
+}
 let win: BrowserWindow | null;
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
@@ -46,7 +51,7 @@ function createWindow() {
   });
 
   const syncConfig = (_: Electron.IpcMainEvent) => {
-    win!.webContents.send("syncConfig")
+    win!.webContents.send("syncConfig");
   };
   ipcMain.on("syncConfig", syncConfig);
 
@@ -82,23 +87,36 @@ function bindKeyEvent(win: BrowserWindow) {
 
 function createTray(_win: BrowserWindow) {
   const tray = new Tray(resolvePath("../public/icon.png"));
-  const contextMenus = Menu.buildFromTemplate([
-    {
-      id: "setting",
-      label: "Setting",
-      click: () => {
-        createSettingWindow();
+
+  async function getContextMenu() {
+    // load system language setting as default language.
+    const [mainlang, sublang] = app.getLocale().split("-");
+    const langName = sublang ? `${mainlang}_${sublang}` : mainlang;
+    const { default: lang } = await loadLanguage(langName);
+    const contextMenus = Menu.buildFromTemplate([
+      {
+        id: "setting",
+        label: lang.context.setting,
+        click: () => {
+          createSettingWindow();
+        },
       },
-    },
-    {
-      id: "exit",
-      label: "Exit",
-      click: () => {
-        app.quit();
+      {
+        id: "exit",
+        label: lang.context.exit,
+        click: () => {
+          app.quit();
+        },
       },
-    },
-  ]);
-  tray.setContextMenu(contextMenus);
+    ]);
+    return contextMenus;
+  }
+
+  tray.on("right-click", () => {
+    getContextMenu().then((menu) => {
+      tray.popUpContextMenu(menu);
+    });
+  });
   tray.setToolTip(`${productName}`);
 }
 
@@ -121,7 +139,10 @@ function registerProtocol(): void {
 }
 
 protocol.registerSchemesAsPrivileged([
-  { scheme: "whichkey", privileges: { bypassCSP: true, standard: true, secure: true } },
+  {
+    scheme: "whichkey",
+    privileges: { bypassCSP: true, standard: true, secure: true },
+  },
 ]);
 
 app.whenReady().then(() => {

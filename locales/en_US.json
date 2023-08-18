@@ -1,0 +1,15 @@
+{
+  "context": {
+    "setting": "Setting",
+    "exit": "Exit"
+  },
+  "setting": {
+    "language": "Language",
+    "fontFamily": "FontFamily",
+    "fontSize": "FontSize",
+    "fontColor": "FontColor",
+    "backgroundColor": "BackgroundColor",
+    "save": "Save",
+    "reset": "Reset to default"
+  }
+}

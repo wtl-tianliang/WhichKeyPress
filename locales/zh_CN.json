@@ -1,0 +1,15 @@
+{
+  "context": {
+    "setting": "设置",
+    "exit": "退出"
+  },
+  "setting": {
+    "language": "语言",
+    "fontFamily": "字体",
+    "fontSize": "字体大小",
+    "fontColor": "字体颜色",
+    "backgroundColor": "背景颜色",
+    "save": "保存",
+    "reset": "恢复默认设置"
+  }
+}

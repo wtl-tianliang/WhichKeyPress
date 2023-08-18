@@ -2,7 +2,7 @@
   "name": "which-key-press",
   "productName": "WhichKeyPress",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An application that shows which key the user has pressed.",
   "author": "wwwszsxcn@hotmail.com",
   "scripts": {
@@ -15,6 +15,7 @@
     "font-list": "^1.5.0",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
+    "vue-i18n": "9.3.0-beta.25",
     "vue-router": "4"
   },
   "devDependencies": {
