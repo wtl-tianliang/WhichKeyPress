@@ -8,6 +8,7 @@ export type ConfigState = {
   color: string;
   fontSize: string;
   language: keyof LanguageConfig;
+  enableCombo: boolean;
 };
 
 /**
@@ -30,6 +31,7 @@ export const useConfig = defineStore("config", () => {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     color: "rgba(255, 255, 255, 1)",
     fontSize: "30px",
+    enableCombo: true,
     language: locale as unknown as keyof LanguageConfig,
   };
 

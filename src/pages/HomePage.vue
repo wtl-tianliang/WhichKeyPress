@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <KeysPanel :code="code" />
+    <KeysPanel :code="code" :combo="combo" />
   </div>
 </template>
 
@@ -12,6 +12,7 @@ import keyMap from "../assets/keycode";
 import { useConfig } from "../stores/config";
 
 const code = ref<string[]>([]);
+const combo = ref(0);
 const i18n = useI18n();
 
 const { sync } = useConfig();
@@ -32,12 +33,15 @@ window.EApi.onKeydown((keyCode: string) => {
   keyCode = getKeyName(keyCode);
   const previousKey = code.value[code.value.length - 1];
   if (previousKey === keyCode) {
+    combo.value += 1;
     return;
   }
+  combo.value = 0;
   code.value.push(keyCode);
 });
 
 window.EApi.onKeyup((keyCode: string) => {
+  combo.value = 0;
   keyCode = getKeyName(keyCode);
   code.value = code.value.filter((code) => code !== keyCode);
 });

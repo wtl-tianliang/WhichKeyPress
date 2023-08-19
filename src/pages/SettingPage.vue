@@ -1,7 +1,7 @@
 <template>
   <div class="setting-page">
     <div class="preview">
-      <key-panel :code="['Control', 'C']"></key-panel>
+      <key-panel :code="['Control', 'C']" :combo="99"></key-panel>
     </div>
 
     <!-- Setting config -->
@@ -51,6 +51,11 @@
         <el-color-picker v-model="config.backgroundColor" show-alpha />
       </el-form-item>
 
+      <!-- backgroundColor -->
+      <el-form-item :label="$t('setting.enableCombo')">
+        <el-switch v-model="config.enableCombo" />
+      </el-form-item>
+
       <!-- submit -->
       <el-button
         class="save-btn"
@@ -70,7 +75,7 @@
 import { ref, watchEffect } from "vue";
 import { useI18n } from "vue-i18n";
 import { ElForm, ElFormItem, ElButton, ElLink } from "element-plus";
-import { ElColorPicker, ElSelect, ElOption } from "element-plus";
+import { ElColorPicker, ElSelect, ElOption, ElSwitch } from "element-plus";
 import KeyPanel from "../components/KeysPanel.vue";
 import { useConfig } from "../stores/config";
 

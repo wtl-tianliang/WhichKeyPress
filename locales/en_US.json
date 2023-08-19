@@ -9,6 +9,7 @@
     "fontSize": "FontSize",
     "fontColor": "FontColor",
     "backgroundColor": "BackgroundColor",
+    "enableCombo": "Combo statistics",
     "save": "Save",
     "reset": "Reset to default"
   }

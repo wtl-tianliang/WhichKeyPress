@@ -9,6 +9,7 @@
     "fontSize": "字体大小",
     "fontColor": "字体颜色",
     "backgroundColor": "背景颜色",
+    "enableCombo": "连击统计",
     "save": "保存",
     "reset": "恢复默认设置"
   }

@@ -1,5 +1,13 @@
 <template>
-  <div class="code" :style="config">{{ code.join("+") }}</div>
+  <div class="code" :style="config">
+    <span>{{ code.join("+") }}</span>
+    <span
+      v-show="config.enableCombo && combo > 0"
+      class="combo"
+      :style="{ '--size': config.fontSize }"
+      >x{{ combo }}</span
+    >
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -7,10 +15,12 @@ import { useConfig } from "../stores/config";
 
 export interface Props {
   code: string[];
+  combo?: number;
 }
 
 withDefaults(defineProps<Props>(), {
   code: () => [],
+  combo: 0,
 });
 
 const { config } = useConfig();
@@ -29,5 +39,11 @@ const { config } = useConfig();
   justify-content: center;
   overflow: hidden;
   white-space: nowrap;
+}
+.combo {
+  position: relative;
+  left: 10px;
+  top: 4px;
+  font-size: calc(var(--size) * 0.8);
 }
 </style>
