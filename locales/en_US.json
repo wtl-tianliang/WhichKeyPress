@@ -1,5 +1,7 @@
 {
   "context": {
+    "hide": "Hide main window",
+    "show": "Show mian window",
     "setting": "Setting",
     "exit": "Exit"
   },

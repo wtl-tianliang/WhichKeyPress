@@ -1,7 +1,9 @@
 {
   "context": {
-    "setting": "设置",
-    "exit": "退出"
+    "hide": "隐藏主窗口",
+    "show": "显示主窗口",
+    "setting": "打开设置",
+    "exit": "退出程序"
   },
   "setting": {
     "language": "语言",
