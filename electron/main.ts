@@ -1,9 +1,8 @@
-import { app, BrowserWindow, ipcMain, Menu, screen, Tray } from "electron";
+import { app, BrowserWindow, ipcMain, screen } from "electron";
 import { net, protocol } from "electron";
 import path from "node:path";
 import { pathToFileURL } from "url";
-import { productName } from "../package.json";
-import { createSettingWindow } from "./setting";
+import { createTray } from "./tray";
 
 const {
   keyDownHandler,
@@ -15,15 +14,6 @@ process.env.PUBLIC = app.isPackaged
   ? process.env.DIST
   : path.join(process.env.DIST, "../public");
 
-function resolvePath(_path: string): string {
-  return path.join(process.env.DIST, _path);
-}
-
-function loadLanguage(name: string) {
-  return import(`../locales/${name}.json`).catch(() => {
-    return import("../locales/en_US.json");
-  });
-}
 let win: BrowserWindow | null;
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
@@ -85,54 +75,6 @@ function bindKeyEvent(win: BrowserWindow) {
   });
 }
 
-function createTray(_win: BrowserWindow) {
-  const tray = new Tray(resolvePath("../public/icon.png"));
-
-  async function getContextMenu() {
-    const visible = _win.isVisible();
-
-    // load system language setting as default language.
-    const [mainlang, sublang] = app.getLocale().split("-");
-    const langName = sublang ? `${mainlang}_${sublang}` : mainlang;
-    const { default: lang } = await loadLanguage(langName);
-    const contextMenus = Menu.buildFromTemplate([
-      {
-        id: "visible",
-        label: visible ? lang.context.hide : lang.context.show,
-        click: () => {
-          if (visible) {
-            _win.hide();
-          } else {
-            _win.show();
-          }
-        },
-      },
-      {
-        id: "setting",
-        label: lang.context.setting,
-        click: () => {
-          createSettingWindow();
-        },
-      },
-      {
-        id: "exit",
-        label: lang.context.exit,
-        click: () => {
-          app.quit();
-        },
-      },
-    ]);
-    return contextMenus;
-  }
-
-  tray.on("right-click", () => {
-    getContextMenu().then((menu) => {
-      tray.popUpContextMenu(menu);
-    });
-  });
-  tray.setToolTip(`${productName}`);
-}
-
 app.on("window-all-closed", () => {
   win = null;
 });
@@ -162,5 +104,5 @@ app.whenReady().then(() => {
   registerProtocol();
   const win = createWindow();
   bindKeyEvent(win);
-  createTray(win);
+  createTray(app, win);
 });
