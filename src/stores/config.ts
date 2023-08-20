@@ -15,9 +15,8 @@ export type ConfigState = {
  * laod language setting in localStorage.
  * @returns string
  */
-function getLocalConfig(): ConfigState {
-  const _data = localStorage.getItem("config") || "{}";
-  const data = JSON.parse(_data) as ConfigState;
+async function getLocalConfig(): Promise<ConfigState> {
+  const data = await window.EApi.loadConfig();
   return data;
 }
 
@@ -36,9 +35,10 @@ export const useConfig = defineStore("config", () => {
   };
 
   const config = reactive<ConfigState>({ ...defaultConfig });
-
-  function sync() {
-    const data = getLocalConfig();
+  
+  async function sync() {
+    const data = await getLocalConfig();
+    console.log(data)
     Object.keys(data).forEach((key) => {
       // @ts-expect-error: key index
       config[key] = data[key];

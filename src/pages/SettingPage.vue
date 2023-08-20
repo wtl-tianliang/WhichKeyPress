@@ -104,8 +104,8 @@ window.EApi.onLoadFontFamily((fonts) => {
 
 function handleConfirm() {
   const data = JSON.stringify(config);
-  localStorage.setItem("config", data);
-  window.EApi.syncConfig();
+  window.EApi.syncConfigToFrame();
+  window.EApi.saveConfig(data);
 }
 function handleToDefault() {
   reset();

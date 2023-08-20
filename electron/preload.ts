@@ -16,11 +16,17 @@ contextBridge.exposeInMainWorld("EApi", {
       cb && cb(data);
     });
   },
-  syncConfig() {
-    ipcRenderer.send("syncConfig");
+  loadConfig() {
+    return ipcRenderer.invoke('loadConfig')
+  },
+  saveConfig(data: string) {
+    return ipcRenderer.invoke("saveConfig", data)
+  },
+  syncConfigToFrame() {
+    ipcRenderer.send("syncConfigToFrame");
   },
   onSyncConfig(callback: () => void) {
-    ipcRenderer.on("syncConfig", () => {
+    ipcRenderer.on("syncConfigToFrame", () => {
       callback && callback();
     });
   },

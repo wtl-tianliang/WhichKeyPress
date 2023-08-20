@@ -3,6 +3,7 @@ import { net, protocol } from "electron";
 import path from "node:path";
 import { pathToFileURL } from "url";
 import { createTray } from "./tray";
+import { initStore } from "./store";
 
 const {
   keyDownHandler,
@@ -40,13 +41,13 @@ function createWindow() {
     },
   });
 
-  const syncConfig = (_: Electron.IpcMainEvent) => {
-    win!.webContents.send("syncConfig");
+  const syncConfigToFrame = (_: Electron.IpcMainEvent) => {
+    win!.webContents.send("syncConfigToFrame");
   };
-  ipcMain.on("syncConfig", syncConfig);
+  ipcMain.on("syncConfigToFrame", syncConfigToFrame);
 
   win.once("close", () => {
-    ipcMain.off("syncConfig", syncConfig);
+    ipcMain.off("syncConfigToFrame", syncConfigToFrame);
   });
 
   // Test active push message to Renderer-process.
@@ -102,6 +103,7 @@ protocol.registerSchemesAsPrivileged([
 
 app.whenReady().then(() => {
   registerProtocol();
+  initStore();
   const win = createWindow();
   bindKeyEvent(win);
   createTray(app, win);

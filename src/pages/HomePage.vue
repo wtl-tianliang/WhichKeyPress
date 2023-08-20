@@ -24,8 +24,8 @@ function getKeyName(keyCode: string): string {
 
 // 1. HomePage and SettingPage are not in the same config-store, so the 'sync' function needs to be invoked.
 // 2. if user chage language, need change i18n's locale.
-window.EApi.onSyncConfig(() => {
-  const data = sync();
+window.EApi.onSyncConfig(async () => {
+  const data = await sync();
   i18n.locale.value = data.language;
 });
 
