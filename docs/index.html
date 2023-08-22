@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhichKeyPress</title>
+  <link rel="shortcut icon" href="./static/icon.ico">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./scripts/scrollreveal.js"></script>
+</head>
+
+<body>
+
+  <!-- header -->
+  <div class="top-level">
+    <canvas id="canvas"></canvas>
+    <div class="front-end">
+      <header>
+        <div class="title">
+          <img src="./static/icon.png" alt="icon">
+        </div>
+        <ul>
+          <li>
+            <a href="https://github.com/wtl-tianliang/WhichKeyPress/releases" target="_blank">历史版本</a>
+            <a href="https://github.com/wtl-tianliang/WhichKeyPress" target="_blank">代码开源</a>
+          </li>
+        </ul>
+      </header>
+      <div class="content">
+        <img src="./static/icon.png" alt="" class="logo">
+        <p>WhichKeyPress</p>
+        <a class="download" href="https://www.oddtools.cn/download/which-key-press/WhichKeyPress_Setup.exe"
+          target="_blank">
+          <img src="./static/windows-fill.png" alt="windows icon">
+          <span>Windows 下载</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- login -->
+  <div class="desc-block">
+    <div class="h-center container">
+      <div class="desc">
+        <h3>键盘操作展示</h3>
+        <p>展示您的键盘操作，视频教程作者必备</p>
+        <p class="notice">* 部分键盘布局可能展示异常，可向作者反馈。</p>
+      </div>
+      <div class="img-box">
+        <img src="./static/launch.gif" alt="launch">
+      </div>
+    </div>
+  </div>
+
+  <!-- vars -->
+  <div class="desc-block">
+    <div class="h-center container">
+      <div class="desc">
+        <h3>个性化配置</h3>
+        <p>支持个性化面板背景、文字样式、展示位置等</p>
+      </div>
+      <div class="img-box">
+        <img src="./static/setting.gif" alt="setting pannel">
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://beian.miit.gov.cn" target="_blank">京ICP备2023003614号</a>
+  </div>
+
+  <script>
+    ScrollReveal().reveal('.container', {
+      delay: 400,
+      duration: 500,
+      scale: 0.5
+    })
+  </script>
+
+  <script src="./scripts/particle.js"></script>
+</body>
+
+</html>

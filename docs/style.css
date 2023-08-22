@@ -1,0 +1,152 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+.h-center {
+  max-width: 1056px;
+  margin: 0 auto;
+}
+
+.top-level {
+  height: 50vh;
+  margin-top: 60px;
+  position: relative;
+}
+
+.top-level .front-end {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.top-level header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid #c0c0c0;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 40px);
+  background-color: #fff;
+  z-index: 1;
+  font-size: 14px;
+}
+
+.top-level header a {
+  color: #333;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.top-level .title {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.top-level .title img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.top-level .logo {
+  width: 120px;
+  margin-top: 10vh;
+  margin-bottom: 40px;
+}
+
+.top-level .content {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.top-level .download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  border: 1px solid #4da1d3;
+  margin: 30px auto 0 auto;
+  height: 40px;
+  line-height: 40px;
+  background-color: #4da1d3;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.top-level .download img {
+  width: 24px;
+  position: relative;
+  left: -10px;
+}
+
+.desc-block {
+  padding: 60px 0;
+}
+
+.desc-block:nth-child(2n) {
+  background-color: #f1f2f5;
+}
+
+.container {
+  display: flex;
+}
+
+.container .desc {
+  padding: 0 20px;
+  flex: 1
+}
+.container .desc .notice {
+  font-size: 12px;
+  color: #666;
+}
+.container .desc p {
+  margin-top: 10px;
+  line-height: 1.5;
+  font-size: 16px;
+}
+.container .img-box {
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 2px 2px 10px 0 #c0c0c0;
+  flex: 1;
+}
+.container .img-box img {
+  width: 100%;
+  transform: scale(1.02) translateY(3px);
+}
+
+
+/* footer */
+
+.footer {
+  text-align: center;
+  height: 80px;
+  border-top: 1px solid #ccc;
+  position: relative;
+}
+
+.footer a {
+  font-size: 14px;
+  color: #999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
