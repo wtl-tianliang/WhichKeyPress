@@ -50,6 +50,12 @@ function createWindow() {
     ipcMain.off("syncConfigToFrame", syncConfigToFrame);
   });
 
+  // https://github.com/electron/electron/issues/24893#issuecomment-1109262719
+  win.hookWindowMessage(0x0116, () => {
+    win!.setEnabled(false);
+    win!.setEnabled(true);
+  });
+
   // Test active push message to Renderer-process.
   win.webContents.on("did-finish-load", () => {
     win?.webContents.send("main-process-message", new Date().toLocaleString());
