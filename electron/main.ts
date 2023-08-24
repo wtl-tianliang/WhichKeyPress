@@ -26,7 +26,6 @@ function createWindow() {
     icon: path.join(process.env.PUBLIC, "icon.png"),
     frame: false,
     transparent: true,
-    alwaysOnTop: true,
     maxHeight: screenHeight / 2,
     maxWidth: screenWidth / 2,
     minWidth: 200,
@@ -40,6 +39,8 @@ function createWindow() {
       preload: path.join(__dirname, "preload.js"),
     },
   });
+
+  win.setAlwaysOnTop(true, "status", 1);
 
   const syncConfigToFrame = (_: Electron.IpcMainEvent) => {
     win!.webContents.send("syncConfigToFrame");
