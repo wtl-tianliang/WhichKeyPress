@@ -94,7 +94,7 @@ watchEffect(() => {
   i18n.locale.value = config.language;
 });
 
-for (let i = 10; i < 80; i += 5) {
+for (let i = 10; i < 65; i += 5) {
   fontSizeOptions.value.push(i);
 }
 

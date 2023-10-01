@@ -1,6 +1,7 @@
 <template>
   <div class="home-page">
-    <KeysPanel :code="code" :combo="combo" />
+    <HistoryPanel class="history-renderer" :list="histories" />
+    <KeysPanel class="code-renderer" :code="code" :combo="combo" />
   </div>
 </template>
 
@@ -8,12 +9,16 @@
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import KeysPanel from "../components/KeysPanel.vue";
+import HistoryPanel from "../components/HistoryPanel.vue";
 import keyMap from "../assets/keycode";
 import { useConfig } from "../stores/config";
+import { useRecoder } from "../components/HistoryRecoder";
 
 const code = ref<string[]>([]);
 const combo = ref(0);
 const i18n = useI18n();
+
+const histories = useRecoder(code)
 
 const { sync } = useConfig();
 
@@ -47,9 +52,22 @@ window.EApi.onKeyup((keyCode: string) => {
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .home-page {
   height: 100vh;
   -webkit-app-region: drag;
+  display: flex;
+  flex-direction: column;
+  .history-renderer {
+    flex: 1;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 6px 6px 0 0;
+  }
+  .code-renderer {
+    height: 50px;
+    border-radius: 0 0 6px 6px;
+  }
 }
 </style>
