@@ -2,7 +2,7 @@
   "name": "which-key-press",
   "productName": "WhichKeyPress",
   "private": true,
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "An application that shows which key the user has pressed.",
   "author": "wwwszsxcn@hotmail.com",
   "scripts": {
